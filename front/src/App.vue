@@ -1,17 +1,32 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <nav-bar></nav-bar>
   <router-view/>
 </template>
 
+<script>
+import NavBar from '@/components/NavBar'
+
+export default {
+  name: 'BookList',
+  components: {
+    'nav-bar': NavBar
+  }
+}
+</script>
+
 <style lang="scss">
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  font-family: '思源黑體', '微軟正黑體', '蘋方黑體', sans-serif;
   color: #2c3e50;
 }
 

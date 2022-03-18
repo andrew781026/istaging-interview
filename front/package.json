@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 3077",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "query-string": "^7.1.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
@@ -29,8 +31,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.3",
+    "fantasticon": "^1.2.3",
+    "open": "^8.4.0",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
+    "serve": "^13.0.2",
     "typescript": "~4.5.5"
   },
   "eslintConfig": {
@@ -46,7 +51,9 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "object-curly-spacing": "off"
+    }
   },
   "browserslist": [
     "> 1%",

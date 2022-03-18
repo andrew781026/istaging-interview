@@ -4,6 +4,18 @@
 
 iStaging 2D FrontEnd Engineer Assessment Test
 
+### 目前使用 Tech
+
+> Tech
+
+- 使用 vue ui 建立的腳手架
+- vue3 + eslint with Standard + scss + TypeScript
+
+> Tool
+
+- [FlatIcon](https://www.flaticon.com/)
+- [Icomoon - convert svg to font icon](https://icomoon.io/app/#/select)
+
 ### 技術要求
 
 - 用 Vue 2 / 3
