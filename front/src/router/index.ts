@@ -21,10 +21,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-
   // TypeGuard
   if (typeof to.meta.title === 'string') {
-    window.document.title = to.meta.title;
+    window.document.title = to.meta.title
   }
   next()
 })
