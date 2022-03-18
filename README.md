@@ -26,12 +26,12 @@ iStaging 2D FrontEnd Engineer Assessment Test
 
 ### 規格需求
 
-#### 1. UI
+#### 1️⃣ UI
 
 - 參考 Figma - https://www.figma.com/file/jeP1aNnM8CHd20MRONce4A/2D-FE-Assessment
 - 樣式 ( 配色 . 寬高 . 元件等等 ) 不限制 . 以實作功能為優先
 
-#### 2. API
+#### 2️⃣ API
 
 - 規格說明 : API Docs - https://demo.api-platform.com/docs
 - 因 CORS 問題 , API 請求網址請加 Proxy 服務網址的前綴
