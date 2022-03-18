@@ -36,6 +36,9 @@ jobs:
 
       # install node.js
       - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       # Runs a single command using the runners shell
       - name: install dependencies
