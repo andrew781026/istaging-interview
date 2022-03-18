@@ -25,7 +25,7 @@ generateFonts({
   normalize: undefined, // --
   selector: null,
   tag: 'i',
-  prefix: 'tree',
+  prefix: 'icon',
 }).then(results => {
 
   console.log('generate Fonts')
