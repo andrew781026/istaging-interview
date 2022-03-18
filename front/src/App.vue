@@ -1,6 +1,10 @@
 <template>
   <nav-bar></nav-bar>
-  <router-view/>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -16,17 +20,29 @@ export default {
 
 <style lang="scss">
 
+/* the transition related classes */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* common css */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 body {
+  font-family: '思源黑體', '微軟正黑體', '蘋方黑體', sans-serif;
   margin: 0;
   min-height: 100vh;
 }
 
 #app {
-  font-family: '思源黑體', '微軟正黑體', '蘋方黑體', sans-serif;
   color: #2c3e50;
 }
 

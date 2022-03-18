@@ -2,8 +2,8 @@
   "name": "front",
   "version": "0.1.0",
   "private": true,
-  "engines" : {
-    "node" : ">=14"
+  "engines": {
+    "node": ">=14"
   },
   "scripts": {
     "serve": "vue-cli-service serve --port 3077",
