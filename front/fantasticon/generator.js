@@ -47,6 +47,7 @@ function copyFolderRecursiveSync(source, target) {
 }
 
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir)
+if (!fs.existsSync('../src/icons')) fs.mkdirSync('../src/icons')
 
 // 官方文件 : https://www.npmjs.com/package/fantasticon#api
 generateFonts({
