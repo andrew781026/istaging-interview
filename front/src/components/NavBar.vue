@@ -5,7 +5,7 @@
     </div>
     <h1 class="flex-1">{{ header_str }}</h1>
     <div class="icon">
-      <i class="edit"></i>
+      <i class="icon icon-edit"></i>
     </div>
   </nav>
 </template>
@@ -25,7 +25,21 @@ export default defineComponent({
 <style scoped lang="scss">
 .nav {
   display: flex;
-  min-height: 80px;
+  height: 80px;
   background-color: #42b983;
+  align-items: center;
+  padding: 0 30px;
+  .icon{
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    &:hover{
+      color: #42b983;
+      background-color: #5d5d5d;
+    }
+  }
 }
 </style>

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve --port 3077",
-    "build": "vue-cli-service build",
+    "build": "node fantasticon/generator.js && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
