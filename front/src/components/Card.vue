@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="`https://picsum.photos/800/600/?random=${book.isbn}`" alt="圖片">
+    <LazyImage :isbn="book.isbn"/>
     <div class="info">
       <h3 class="title" :title="book.title">{{ book.title }}</h3>
       <h4 class="author" :title="book.author">{{ book.author }}</h4>
@@ -10,11 +10,15 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
+import LazyImage from '@/components/LazyImage.vue'
 
 export default defineComponent({
   name: 'PureCard',
   props: {
     book: Object
+  },
+  components: {
+    LazyImage
   }
 })
 </script>

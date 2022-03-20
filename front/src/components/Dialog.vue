@@ -15,6 +15,39 @@
                 <input type="text" value="A123456789" disabled>
               </div>
             </div>
+            <div class="row">
+              <label for="">身分證字號</label>
+              <div class="input-block">
+                <input type="text" value="A123456789" disabled>
+                <div class="error-block">
+                  sosososo
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="">身分證字號</label>
+              <div class="input-block">
+                <input type="text" value="A123456789" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <label for="">身分證字號</label>
+              <div class="input-block">
+                <input type="text" value="A123456789" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <label for="">身分證字號</label>
+              <div class="input-block">
+                <input type="text" value="A123456789" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <label for="">身分證字號</label>
+              <div class="input-block">
+                <input type="text" value="A123456789" disabled>
+              </div>
+            </div>
           </div>
         </div>
         <div class="pop-up-action">
@@ -123,12 +156,12 @@ export default {
   background-color: #fff;
   transition: all 0.3s;
   border: 1px solid #565656;
-  max-width: 700px;
+  width: 500px;
 
   > .pop-up-title {
     display: flex;
     position: relative;
-    min-height: 40px;
+    min-height: 60px;
 
     h3 {
       font-weight: bold;
@@ -156,7 +189,7 @@ export default {
   > .pop-up-content {
 
     font-size: 14px;
-    padding: 30px;
+    padding: 0 30px;
     line-height: 2em;
     overflow-y: auto;
     max-height: 600px;
