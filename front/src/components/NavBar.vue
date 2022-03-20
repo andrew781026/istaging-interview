@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <div class="icon">
-      <i class="back"></i>
+      <i class="icon icon-back"></i>
     </div>
     <h1 class="flex-1">{{ header_str }}</h1>
     <div class="icon">

@@ -8,7 +8,7 @@ const open = require('open');
 const port = process.argv[2] || 3026;
 
 const outputDir = './dist';
-const vueIconsDir = path.resolve('../src/icons')
+const vueIconsDir = path.resolve(__dirname,'../src/icons')
 
 function copyFileSync(source, target) {
 
