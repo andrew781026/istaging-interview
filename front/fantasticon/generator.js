@@ -7,7 +7,8 @@ const path = require('path');
 const open = require('open');
 const port = process.argv[2] || 3026;
 
-const outputDir = './dist';
+const inputDir =  path.resolve(__dirname,'./icons')
+const outputDir =  path.resolve(__dirname,'./dist')
 const vueIconsDir = path.resolve(__dirname,'../src/icons')
 
 function copyFileSync(source, target) {
@@ -53,7 +54,7 @@ if (!fs.existsSync(vueIconsDir)) fs.mkdirSync(vueIconsDir)
 // 官方文件 : https://www.npmjs.com/package/fantasticon#api
 generateFonts({
   name: 'icons',
-  inputDir: './icons', // (required)
+  inputDir, // (required)
   outputDir, // (required)
   fontsUrl: '',
   fontTypes: [/* FontAssetType.EOT, FontAssetType.WOFF2,*/ FontAssetType.WOFF],
@@ -79,6 +80,7 @@ generateFonts({
   // copy ./dist files to public folder
   copyFolderRecursiveSync(outputDir, vueIconsDir);
 
+  /*
   const server = http.createServer((request, response) => {
     // You pass two more arguments for config and middleware
     // More details here: https://github.com/vercel/serve-handler#options
@@ -93,5 +95,6 @@ generateFonts({
     // use serve and open browser with target Url
     open(`http://localhost:${port}/icons.html`)
   });
+  */
 });
 /* eslint-disable */

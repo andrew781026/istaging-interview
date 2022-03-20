@@ -14,7 +14,7 @@ iStaging 2D FrontEnd Engineer Assessment Test
 > Tool
 
 - [FlatIcon](https://www.flaticon.com/)
-- [Icomoon - convert svg to font icon](https://icomoon.io/app/#/select)
+- [fantasticon - convert svg to font icon](https://github.com/tancredi/fantasticon#readme)
 
 ### 技術要求
 
