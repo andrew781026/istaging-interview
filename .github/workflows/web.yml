@@ -42,9 +42,18 @@ jobs:
         with:
           node-version: '14'
 
+      # Cache node_modules
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+
       # Runs a single command using the runners shell
       - name: install dependencies
-        run: npm install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
       # Runs a single command using the runners shell
       - name: try to build the project
