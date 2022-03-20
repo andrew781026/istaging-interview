@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-          cache-dependency-path: front/package-lock.json
+          cache-dependency-path: 'front/package-lock.json'
 
       # Runs a single command using the runners shell
       - name: install dependencies
