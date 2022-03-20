@@ -8,6 +8,7 @@ const open = require('open');
 const port = process.argv[2] || 3026;
 
 const outputDir = './dist';
+const vueIconsDir = path.resolve('../src/icons')
 
 function copyFileSync(source, target) {
 
@@ -47,7 +48,7 @@ function copyFolderRecursiveSync(source, target) {
 }
 
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir)
-if (!fs.existsSync('../src/icons')) fs.mkdirSync('../src/icons')
+if (!fs.existsSync(vueIconsDir)) fs.mkdirSync(vueIconsDir)
 
 // 官方文件 : https://www.npmjs.com/package/fantasticon#api
 generateFonts({
@@ -76,7 +77,7 @@ generateFonts({
   console.log('generate Fonts successfully')
 
   // copy ./dist files to public folder
-  copyFolderRecursiveSync(outputDir, '../src/icons');
+  copyFolderRecursiveSync(outputDir, vueIconsDir);
 
   const server = http.createServer((request, response) => {
     // You pass two more arguments for config and middleware
