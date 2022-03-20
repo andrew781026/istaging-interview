@@ -28,6 +28,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'front' # Here the path to the folder where package-lock.json is located.
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -43,15 +46,15 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: install dependencies
-        run: cd front && npm install
+        run: npm install
 
       # Runs a single command using the runners shell
       - name: try to build the project
-        run: cd front && npm run build
+        run: npm run build
 
       # use actions-gh-pages to deploy dist to gh-pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./front/dist
+          publish_dir: ./dist
