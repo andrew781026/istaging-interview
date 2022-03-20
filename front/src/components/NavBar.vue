@@ -30,6 +30,10 @@ export default defineComponent({
   align-items: center;
   padding: 0 30px;
   .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
     color: #333;
     cursor: pointer;
     transition: all 0.3s;
@@ -37,7 +41,7 @@ export default defineComponent({
     width: 60px;
     border-radius: 50%;
     &:hover{
-      color: #42b983;
+      color: white;
       background-color: #5d5d5d;
     }
   }
