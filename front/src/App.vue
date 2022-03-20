@@ -5,15 +5,18 @@
       <component :is="Component" />
     </transition>
   </router-view>
+  <Dialog></Dialog>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
+import Dialog from '@/components/Dialog'
 
 export default {
   name: 'BookList',
   components: {
-    'nav-bar': NavBar
+    'nav-bar': NavBar,
+    Dialog
   }
 }
 </script>

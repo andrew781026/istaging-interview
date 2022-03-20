@@ -1,22 +1,46 @@
 <template>
   <nav class="nav">
-    <div class="icon">
-      <i class="icon icon-back"></i>
-    </div>
-    <h1 class="flex-1">{{ header_str }}</h1>
-    <div class="icon">
-      <i class="icon icon-edit"></i>
-    </div>
+    <template v-if="$route.name === 'list'">
+      <h1 class="nav-title">The Book Shelf</h1>
+      <div class="icon-wrap" @click="openDialog">
+        <i class="icon icon-add"></i>
+        <span class="text">Create</span>
+      </div>
+    </template>
+    <template v-else>
+      <div class="icon-wrap" @click="toListPage">
+        <i class="icon icon-back"></i>
+        <span class="text">Back</span>
+      </div>
+      <h1 class="nav-title">{{singleBook.title}}</h1>
+      <div class="icon-wrap" @click="openDialog">
+        <i class="icon icon-edit"></i>
+        <span class="text">Edit</span>
+      </div>
+    </template>
   </nav>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
+import {singleBook, openDialog} from '@/views/useBook'
 
 export default defineComponent({
   name: 'NavBar',
   props: {
-    header_str: String
+    header_str: {
+      type: String,
+      default: 'The Book Shelf'
+    }
+  },
+  setup () {
+    return {singleBook}
+  },
+  methods: {
+    toListPage () {
+      this.$router.push({name: 'list'})
+    },
+    openDialog
   }
 })
 </script>
@@ -24,25 +48,46 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .nav {
+  position: sticky;
+  top: 0;
   display: flex;
   height: 80px;
-  background-color: #42b983;
+  background-color: #53c28f;
   align-items: center;
-  padding: 0 30px;
-  .icon{
+  padding: 0;
+  .nav-title{
+    flex-grow: 1;
+    text-align: center;
+  }
+  .icon-wrap{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     font-size: 24px;
     color: #333;
     cursor: pointer;
     transition: all 0.3s;
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
+    padding: 30px;
+    background-color: #41b682;
+    /*
+    顏色參考 : https://www.colorhexa.com/42b983
+    border-color: #5d5d5d;
+    border-style: solid;
+    &:first-child{
+      border-width: 0 1px 0 0;
+    }
+    &:last-child{
+      border-width: 0 0 0 1px;
+    }
+    */
     &:hover{
       color: white;
-      background-color: #5d5d5d;
+      background-color: #7c7f7e;
+    }
+    .text{
+      margin-left: 8px;
+      transform: translateY(-2px);
     }
   }
 }

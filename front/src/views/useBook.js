@@ -2,6 +2,8 @@ import {onBeforeUnmount, onMounted, ref} from 'vue'
 import BookService from '@/api/book'
 import * as dayjs from 'dayjs'
 
+export const dialogShow = ref(false)
+
 // 細節頁面的 singleBook
 export const singleBook = ref({})
 
@@ -12,6 +14,30 @@ export const isLoading = ref(false)
 
 export const observer = ref(null)
 export const loadMore = ref(null)
+
+function showModal () {
+  const modalWrap = document.querySelector('.pop-up-container')
+
+  const popup = modalWrap.querySelector('.pop-up-box')
+
+  modalWrap.style.display = 'flex'
+  popup.style.transform = 'scale(0)'
+
+  setTimeout(() => popup.style.transform = 'scale(1)', 0)
+}
+
+function closeModal () {
+  const modalWrap = document.querySelector('.pop-up-container')
+
+  const popup = modalWrap.querySelector('.pop-up-box')
+
+  popup.style.transform = 'scale(0)'
+
+  setTimeout(() => modalWrap.style.display = 'none', 300)
+}
+
+export const openDialog = () => dialogShow.value = true
+export const closeDialog = () => dialogShow.value = false
 
 export const setSingleBook = newSingleBook => {
   const published = dayjs(newSingleBook.publicationDate).format('YYYY/MM/DD HH:mm')

@@ -1,15 +1,190 @@
 <template>
-<div class="dialog">
-  <i class="close"></i>
-</div>
+  <div class="pop-up-container" v-show="show" :class="[closing && 'closing',opening && 'opening']">
+    <div class="pop-up-container-root">
+      <div class="pop-up-box">
+        <div class="pop-up-title flex justifyContent">
+          <h3>這是 Modal</h3>
+          <img class='close' @click='closeDialog()'
+               src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMS45OTJwdCIgdmlld0JveD0iMCAwIDUxMS45OTIgNTExLjk5MiIgd2lkdGg9IjUxMS45OTJwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNDE1LjQwMjM0NCA0OTUuNDIxODc1LTE1OS40MDYyNS0xNTkuNDEwMTU2LTE1OS40MDYyNSAxNTkuNDEwMTU2Yy0yMi4wOTc2NTYgMjIuMDkzNzUtNTcuOTIxODc1IDIyLjA5Mzc1LTgwLjAxOTUzMiAwLTIyLjA5Mzc1LTIyLjA5NzY1Ni0yMi4wOTM3NS01Ny45MjE4NzUgMC04MC4wMTk1MzFsMTU5LjQxMDE1Ny0xNTkuNDA2MjUtMTU5LjQxMDE1Ny0xNTkuNDA2MjVjLTIyLjA5Mzc1LTIyLjA5NzY1Ni0yMi4wOTM3NS01Ny45MjE4NzUgMC04MC4wMTk1MzIgMjIuMDk3NjU3LTIyLjA5Mzc1IDU3LjkyMTg3Ni0yMi4wOTM3NSA4MC4wMTk1MzIgMGwxNTkuNDA2MjUgMTU5LjQxMDE1NyAxNTkuNDA2MjUtMTU5LjQxMDE1N2MyMi4wOTc2NTYtMjIuMDkzNzUgNTcuOTIxODc1LTIyLjA5Mzc1IDgwLjAxOTUzMSAwIDIyLjA5Mzc1IDIyLjA5NzY1NyAyMi4wOTM3NSA1Ny45MjE4NzYgMCA4MC4wMTk1MzJsLTE1OS40MTAxNTYgMTU5LjQwNjI1IDE1OS40MTAxNTYgMTU5LjQwNjI1YzIyLjA5Mzc1IDIyLjA5NzY1NiAyMi4wOTM3NSA1Ny45MjE4NzUgMCA4MC4wMTk1MzEtMjIuMDk3NjU2IDIyLjA5Mzc1LTU3LjkyMTg3NSAyMi4wOTM3NS04MC4wMTk1MzEgMHptMCAwIiBmaWxsPSIjZTc2ZTU0Ii8+PC9zdmc+"/>
+        </div>
+        <div class="pop-up-content">
+          這是 pop-up-content
+          <br>
+          或去外解道天施也功國服中車建；輕別人呢制話；服公連兒的？廣廣沒布國，土電綠要，片看請不現日各條火高小外了的……新廣人以一男不友能素還
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          然表的不時愛直改東修爭雖是溫。因我成導流熱深加就細任區做歡學這保重及前開我我於化世足健人，同身藝熱友中動清認成委天高資天經眼技全代元生一氣社單務可上，意充相。一勢生務想期這海兒服動遠好和是形教注還的下、
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          統無次可分年也整須質供聲卻費著中何地於解，放環活從中生經：因氣文看龍氣。離生當照母了是意有預不局消：開得死下能下滿四回確遠總；張了文果為火心給！年致境同。
+
+          不什失機只其。你龍說完！什月便給來；著早反館記完華業好那親；類事一記才得解前，年必的局濟、我的上，合實活口好來操告達訴中是過是各故大家計除和心指陽雖市廣錯隊可近能得得要一！
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          元神優道。
+
+          善比花的個身前子本過不快痛物。
+
+          西在個要興於我氣我快本不的天不山可演；公作制就陽過積時如些物我驚路便展機了著聽兒這！
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <div class="pop-up-action flex justifyContent">
+          <button @click='closeDialog()'>取消</button>
+          <button @click='closeDialog()'>確定送出</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import {dialogShow, openDialog, closeDialog} from '@/views/useBook'
+
 export default {
-  name: 'MyDialog'
+  name: 'MyDialog',
+  setup () {
+    return {dialogShow, openDialog, closeDialog}
+  },
+  data () {
+    return {
+      closing: false,
+      opening: false,
+      show: false
+    }
+  },
+  watch: {
+    dialogShow (newDialogShow, oldDialogShow) {
+      if (newDialogShow !== oldDialogShow) {
+        if (newDialogShow) {
+          this.show = true
+          this.opening = true
+          setTimeout(() => this.opening = false, 600)
+        } else {
+          this.closing = true
+          setTimeout(() => {
+            this.show = false
+            this.closing = false
+          }, 600)
+        }
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+/*
+.dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  z-index: 10;
+  min-height: 100vh;
+  width: 100%;
 
+  .mask {
+    height: 100%;
+    width: 100%;
+  }
+}
+*/
+
+.pop-up-container.opening .pop-up-box {
+  animation: bounce-in .5s;
+}
+
+.pop-up-container.closing .pop-up-box {
+  animation: bounce-in .5s reverse forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pop-up-container {
+  min-height: 100vh;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  &::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    background-color: rgba(86, 86, 86, 0.75)
+  }
+}
+
+.pop-up-container-root {
+  height: 100vh;
+  overflow: auto;
+  z-index: 5;
+}
+
+.pop-up-box {
+  margin: 32px;
+  border-radius: 4px;
+  z-index: 6;
+  background-color: #fff;
+  transition: all 0.3s;
+  border: 1px solid #565656;
+
+  > .pop-up-title {
+    position: relative;
+    border-bottom: 1px solid #565656;
+    padding: 30px;
+
+    h3 {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      height: 32px;
+      width: 32px;
+
+      &:hover {
+        filter: opacity(0.3);
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+  }
+
+  > .pop-up-content {
+
+    font-size: 14px;
+    padding: 30px;
+    line-height: 2em;
+    overflow-y: auto;
+    max-height: 600px;
+  }
+
+  > .pop-up-action {
+    padding: 15px;
+    border-top: 1px solid #565656;
+  }
+}
 </style>

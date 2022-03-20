@@ -3,7 +3,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    name: 'list',
     component: () => import('../views/ListView.vue'),
     meta: {title: 'Tree 圖書館 🏛'}
   },
