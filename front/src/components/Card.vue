@@ -3,7 +3,7 @@
     <img :src="`https://picsum.photos/800/600/?random=${book.isbn}`" alt="圖片">
     <div class="info">
       <h3 class="title" :title="book.title">{{ book.title }}</h3>
-      <h4 class="description" :title="book.description">{{ book.description }}</h4>
+      <h4 class="author" :title="book.author">{{ book.author }}</h4>
     </div>
   </div>
 </template>
@@ -21,21 +21,32 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+$card-bgcolor: #1bc734;
+
 .card {
-  background-color: #1bc734;
+  background-color: $card-bgcolor;
   display: flex;
-  // width: 400px;
-  flex-grow: 1;
-  min-width: 300px;
+  width: 430px;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 10%);
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($card-bgcolor, 8%);
+  }
+
+  &:active {
+    background-color: darken($card-bgcolor, 8%);
+    box-shadow: 0 0 2px 8px lighten($card-bgcolor, 30%);
+  }
 
   img {
     width: 200px;
   }
 
   .info {
+    width: 230px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -44,7 +55,7 @@ export default defineComponent({
 
     /* 需要做 truncate */
     .title {
-      width: 200px;
+      width: 100%;
       font-size: 24px;
       margin: 4px 0;
       white-space: nowrap;
@@ -52,8 +63,8 @@ export default defineComponent({
       text-overflow: ellipsis;
     }
 
-    .description {
-      width: 200px;
+    .author {
+      width: 100%;
       font-size: 16px;
       margin: 4px 0;
       -webkit-line-clamp: 4;
@@ -61,6 +72,17 @@ export default defineComponent({
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 230px;
+    flex-direction: column;
+
+    img {
+      width: 100%;
     }
   }
 }

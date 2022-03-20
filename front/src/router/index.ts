@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {title: 'Tree 圖書館 🏛'}
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'detail',
     component: () => import('../views/DetailView.vue'),
     meta: {title: '單本書籍'}

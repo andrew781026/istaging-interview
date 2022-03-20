@@ -1,7 +1,10 @@
 <template>
-  <div class="about">
+  <div class="list">
     <div class="book-list">
-      <Card v-for="book in books" :key="book.isbn" :book="book"></Card>
+      <Card v-for="book in bookList" :key="book.isbn" :book="book" @click="viewDetail(book)"></Card>
+    </div>
+    <div class="load-more" ref="loadMore">
+      <PrimaryButton type="primary" @click="getMoreBooks">LOAD MORE</PrimaryButton>
     </div>
   </div>
 </template>
@@ -9,26 +12,29 @@
 <script>
 import {defineComponent} from 'vue'
 import Card from '@/components/Card.vue'
-import BookService from '@/api/book'
+import PrimaryButton from '@/components/PrimaryButton.vue'
+import {page, bookList, setSingleBook, observer, loadMore, useBook, getMoreBooks} from './useBook'
 
 export default defineComponent({
   name: 'ListView',
+  setup () {
+    useBook()
+    return {observer, loadMore, bookList, page}
+  },
   components: {
-    Card
+    Card,
+    PrimaryButton
   },
-  mounted () {
-    // 使用 BookService 取得 book 的列表資料
-    BookService.list()
-      .then(books => {
-        // 根據高度 & 寬度 , 控制要顯示的 book 數量
-        this.books = books
-      })
-      .catch(console.error)
-  },
-  data () {
-    return {
-      books: []
+  methods: {
+    getMoreBooks,
+    viewDetail (book) {
+      setSingleBook(book)
+      // go to detail page
+      this.$router.push({name: 'detail', params: {id: book['@id'].replace('/books/', '')}})
     }
+  },
+  updated () {
+    console.log(this.bookList.length)
   }
 })
 </script>
@@ -40,5 +46,11 @@ export default defineComponent({
   gap: 30px;
   padding: 30px;
   justify-content: center;
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 </style>

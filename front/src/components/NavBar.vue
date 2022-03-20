@@ -26,6 +26,6 @@ export default defineComponent({
 .nav {
   display: flex;
   min-height: 80px;
-  background-color: #26dde3;
+  background-color: #42b983;
 }
 </style>
