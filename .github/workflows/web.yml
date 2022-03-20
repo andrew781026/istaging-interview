@@ -38,8 +38,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       # Runs a single command using the runners shell
       - name: install dependencies
