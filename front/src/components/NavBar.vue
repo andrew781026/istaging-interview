@@ -13,7 +13,7 @@
         <span class="text">Back</span>
       </div>
       <h1 class="nav-title">{{ singleBook.title }}</h1>
-      <div class="icon-wrap" @click="openDialog">
+      <div class="icon-wrap" @click="openDialog(singleBook,$route.params.id,'edit')">
         <i class="icon icon-edit"></i>
         <span class="text">Edit</span>
       </div>

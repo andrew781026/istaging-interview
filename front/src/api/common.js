@@ -7,29 +7,29 @@ let localStorage = window.localStorage;
 
 class DomainCommon {
 
-  static fetchGet({url, params, resolve, reject, timeout = undefined, accept}) {
+  static fetchGet({url, params, resolve, reject, timeout = undefined, optionHeaders}) {
 
-    return _fetch({url, resolve, reject, method: 'GET', params, timeout, accept});
+    return _fetch({url, resolve, reject, method: 'GET', params, timeout, optionHeaders});
   }
 
-  static fetchPost({url, params, jsonBody, resolve, reject, timeout = undefined, accept}) {
+  static fetchPost({url, params, jsonBody, resolve, reject, timeout = undefined, optionHeaders}) {
 
-    return _fetch({url, resolve, reject, method: 'POST', params, data: jsonBody, timeout, accept});
+    return _fetch({url, resolve, reject, method: 'POST', params, data: jsonBody, timeout, optionHeaders});
   }
 
-  static fetchPut({url, params, jsonBody, resolve, reject, timeout = undefined, accept}) {
+  static fetchPut({url, params, jsonBody, resolve, reject, timeout = undefined, optionHeaders}) {
 
-    return _fetch({url, resolve, reject, method: 'PUT', params, data: jsonBody, timeout, accept});
+    return _fetch({url, resolve, reject, method: 'PUT', params, data: jsonBody, timeout, optionHeaders});
   }
 
-  static fetchPatch({url, params, jsonBody, resolve, reject, timeout = undefined, accept}) {
+  static fetchPatch({url, params, jsonBody, resolve, reject, timeout = undefined, optionHeaders}) {
 
-    return _fetch({url, resolve, reject, method: 'PATCH', params, data: jsonBody, timeout, accept});
+    return _fetch({url, resolve, reject, method: 'PATCH', params, data: jsonBody, timeout, optionHeaders});
   }
 
-  static fetchDelete({url, params, jsonBody, resolve, reject, timeout = undefined, accept}) {
+  static fetchDelete({url, params, jsonBody, resolve, reject, timeout = undefined, optionHeaders}) {
 
-    return _fetch({url, resolve, reject, method: 'DELETE', params, data: jsonBody, timeout, accept});
+    return _fetch({url, resolve, reject, method: 'DELETE', params, data: jsonBody, timeout, optionHeaders});
   }
 
   static getApiUrl() {
@@ -52,7 +52,7 @@ class DomainCommon {
 
 }
 
-async function _fetch({url, method, params, data, optionHeaders = {}, resolve, reject, accept = 'application/json'}) {
+async function _fetch({url, method, params, data, optionHeaders = {}, resolve, reject}) {
 
   let options = method ? {method} : {};
   options = data ?
@@ -61,10 +61,10 @@ async function _fetch({url, method, params, data, optionHeaders = {}, resolve, r
 
   // set apiTokenHeader if available
   options.headers = {
-    ...optionHeaders,
-    ...getApiTokenHeader(),
-    accept,
+    'accept': 'application/json',
     'Content-Type': 'application/json',
+    ...getApiTokenHeader(),
+    ...optionHeaders,
   };
 
   try {

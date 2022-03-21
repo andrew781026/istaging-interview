@@ -3,6 +3,7 @@ import BookService from '@/api/book'
 import * as dayjs from 'dayjs'
 
 export const dialogShow = ref(false)
+export const dialogType = ref('')
 export const isLoading = ref(false)
 
 // 細節頁面的 singleBook
@@ -18,7 +19,11 @@ export const page = ref(1)
 export const observer = ref(null)
 export const loadMore = ref(null)
 
-export const openDialog = () => dialogShow.value = true
+export const openDialog = (newDialogBook, id, type = 'create') => {
+  dialogType.value = type
+  dialogBook.value = (type === 'edit') ? {...newDialogBook, id} : {}
+  dialogShow.value = true
+}
 export const closeDialog = () => dialogShow.value = false
 export const openLoader = () => isLoading.value = true
 export const closeLoader = () => isLoading.value = false
@@ -31,21 +36,45 @@ export const setSingleBook = newSingleBook => {
   }
 }
 
+export const updateSingleBook = (id, newSingleBook) => {
+  openLoader()
+  BookService.update(id, newSingleBook)
+    .then(book => {
+      singleBook.value = book
+      closeDialog()
+    })
+    .catch(console.error)
+    .finally(() => closeLoader())
+}
+
+export const addSingleBook = (newSingleBook, router) => {
+  openLoader()
+  BookService.add(newSingleBook)
+    .then(book => {
+      singleBook.value = book
+      router.push({name: 'detail', params: {id: book['@id'].replace('/books/', '')}})
+      closeDialog()
+    })
+    .catch(console.error)
+    .finally(() => closeLoader())
+}
+
 export const getMoreBooks = () => {
   openLoader()
   BookService.list(page.value)
     .then(books => {
-      // 根據高度 & 寬度 , 控制要顯示的 book 數量
-      bookList.value = [...(bookList.value || []), ...books['hydra:member']]
-      page.value++
-      closeLoader()
+      if (books['hydra:member'].length > 0) {
+        // 根據高度 & 寬度 , 控制要顯示的 book 數量
+        bookList.value = [...(bookList.value || []), ...books['hydra:member']]
+        page.value++
+      }
     })
     .catch(console.error)
+    .finally(() => closeLoader())
 }
 
 export const useBook = () => {
   onMounted(() => {
-    console.log('onMounted')
     // 使用 BookService 取得 book 的列表資料
     getMoreBooks()
 

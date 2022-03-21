@@ -8,9 +8,11 @@ const BookService = {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchGet({
         url: `${DomainCommon.getApiUrl()}/books`,
-        accept: 'application/ld+json', // 要用 ld+json 才取的到 @id
         params: {page},
-        resolve, reject
+        resolve, reject,
+        optionHeaders: {
+          'accept': 'application/ld+json' // 要用 ld+json 才取的到 @id
+        },
       });
     });
   },
@@ -29,17 +31,25 @@ const BookService = {
       return DomainCommon.fetchPost({
         url: `${DomainCommon.getApiUrl()}/books`,
         jsonBody: book,
-        resolve, reject
+        resolve, reject,
+        optionHeaders: {
+          'Content-Type': 'application/ld+json',
+          'accept': 'application/ld+json'
+        }
       });
     });
   },
 
-  update: function (id,book) {
+  update: function (id, book) {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchPatch({
         url: `${DomainCommon.getApiUrl()}/books/${id}`,
         jsonBody: book,
-        resolve, reject
+        resolve, reject,
+        optionHeaders: {
+          'Content-Type': 'application/merge-patch+json',
+          'accept': 'application/ld+json'
+        }
       });
     });
   },

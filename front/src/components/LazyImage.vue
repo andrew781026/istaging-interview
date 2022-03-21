@@ -18,12 +18,12 @@ const imgObserver = new IntersectionObserver(entries => {
     //   entry.target
     //   entry.time
     if (entry.isIntersecting === true) {
-      console.log('image isIntersecting')
+      // console.log('image isIntersecting')
       entry.target.src = entry.target.dataset.src
     }
     if (entry.isIntersecting === false) {
-      console.log('image is out of Intersecting')
-      entry.target.src = 'https://fakeimg.pl/800x600/'
+      // console.log('image is out of Intersecting')
+      // entry.target.src = 'https://fakeimg.pl/800x600/'
     }
   })
 })

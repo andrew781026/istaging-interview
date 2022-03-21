@@ -32,9 +32,6 @@ export default defineComponent({
       // go to detail page
       this.$router.push({name: 'detail', params: {id: book['@id'].replace('/books/', '')}})
     }
-  },
-  updated () {
-    console.log(this.bookList.length)
   }
 })
 </script>

@@ -12,7 +12,7 @@
     line-height: 2.25rem;
     vertical-align: top;
 
-    .required::after {
+    &.required::after {
       content: '*';
       position: relative;
       top: -4px;
@@ -50,6 +50,10 @@
       background-color: var(--silver-light);
       opacity: 1;
       color: var(--silver);
+    }
+
+    &.dp__input_icon_pad{
+      padding-left: 35px;
     }
   }
 

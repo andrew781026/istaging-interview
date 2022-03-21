@@ -7,14 +7,14 @@
         </div>
         <div class="pop-up-content">
           <div class="form-group">
-            <FormItem label="Name" :required="true" :error-msg="errMsg.name">
+            <FormItem label="Name" :required="true" :error-msg="errMsg.title">
               <input type="text" v-model="dialogBook.title">
             </FormItem>
             <FormItem label="Author" :required="true" :error-msg="errMsg.author">
               <input type="text" v-model="dialogBook.author">
             </FormItem>
             <FormItem label="Pub date" :required="true" :error-msg="errMsg.publicationDate">
-              <input type="date" v-model="dialogBook.publicationDate">
+              <Datepicker v-model="dialogBook.publicationDate"/>
             </FormItem>
             <FormItem label="ISBN" :required="true" :error-msg="errMsg.isbn">
               <input type="text" v-model="dialogBook.isbn">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="pop-up-action">
-          <PrimaryButton type="primary">
+          <PrimaryButton type="primary" @click="save(dialogBook)">
             <i class="icon icon-save"></i>
             Save
           </PrimaryButton>
@@ -36,31 +36,34 @@
 </template>
 
 <script>
-import {dialogShow, openDialog, closeDialog, dialogBook} from '@/views/useBook'
+import {
+  dialogShow,
+  closeDialog,
+  dialogBook,
+  dialogType,
+  updateSingleBook,
+  addSingleBook
+} from '@/views/useBook'
 import PrimaryButton from '@/components/PrimaryButton.vue'
 import FormItem from '@/components/FormItem.vue'
+import Datepicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: 'MyDialog',
   setup() {
-    return {dialogShow, dialogBook, openDialog, closeDialog}
+    return {dialogShow, dialogBook, dialogType, closeDialog}
   },
   components: {
     PrimaryButton,
-    FormItem
+    FormItem,
+    Datepicker
   },
   data() {
     return {
       closing: false,
       opening: false,
       show: false,
-      params: [
-        {name: 'title', label: 'Name'},
-        {name: 'author', label: 'Author'},
-        {name: 'publicationDate', label: 'Pub date'},
-        {name: 'isbn', label: 'ISBN'},
-        {name: 'description', label: 'Description'}
-      ],
       errMsg: {}
     }
   },
@@ -79,6 +82,22 @@ export default {
           }, 600)
         }
       }
+    }
+  },
+  methods: {
+    save() {
+      const newSingleBook = {
+        title: this.dialogBook.title,
+        author: this.dialogBook.author,
+        publicationDate: this.dialogBook.publicationDate,
+        isbn: this.dialogBook.isbn,
+        description: this.dialogBook.description
+      }
+      const validInfo = Object.keys(newSingleBook).map(attr => this.errMsg[attr] = this.dialogBook[attr] ? '' : '必填欄位')
+      // ISBN-10 or ISBN-13
+      const noError = validInfo.join('').length === 0
+      if (noError && this.dialogType === 'create') addSingleBook(newSingleBook, this.$router)
+      else if (noError && this.dialogType === 'edit') updateSingleBook(this.dialogBook.id, newSingleBook)
     }
   }
 }
