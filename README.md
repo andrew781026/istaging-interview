@@ -46,3 +46,15 @@ iStaging 2D FrontEnd Engineer Assessment Test
   - 圖書預覽圖請固定使用 : https://picsum.photos/800/600
 
 #### 功能說明
+
+#### 加分項目 ( 選擇性 )
+
+1. 使用 Composition API
+2. 使用 Nuxt.js & SSR 模式
+3. 使用 TypeScript
+4. 實作 SEO
+5. 撰寫 Unit Test 
+6. 首頁圖書列表實作無限滾動
+7. 確保圖書列表載入超過 10,000 筆圖書資料後 , 不影響瀏覽體驗
+8. 實作 CI/CD , 並將網站部屬至任一雲端代管服務中
+9. 加入其他可以展現個人能力和知識的細節 ( 架構 . 程式碼風格 . UX ...等 )

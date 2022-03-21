@@ -1,10 +1,12 @@
 import {onBeforeUnmount, onMounted, ref} from 'vue'
 import BookService from '@/api/book'
 import * as dayjs from 'dayjs'
+import {useRoute} from 'vue-router'
 
 export const dialogShow = ref(false)
 export const dialogType = ref('')
 export const isLoading = ref(false)
+export const infinite = ref(false)
 
 // 細節頁面的 singleBook
 export const singleBook = ref({})
@@ -72,8 +74,9 @@ export const getMoreBooks = () => {
     .then(books => {
       if (books['hydra:member'].length > 0) {
         // 根據高度 & 寬度 , 控制要顯示的 book 數量
+        // bookList.value.push(...books['hydra:member'])
         bookList.value = [...(bookList.value || []), ...books['hydra:member']]
-        page.value++
+        if (!infinite.value) page.value++
       }
     })
     .catch(console.error)
@@ -82,6 +85,7 @@ export const getMoreBooks = () => {
 
 export const useBook = () => {
   onMounted(() => {
+    infinite.value = useRoute().query.isInfinite
     // 使用 BookService 取得 book 的列表資料
     getMoreBooks()
 
@@ -97,7 +101,7 @@ export const useBook = () => {
         //   entry.target
         //   entry.time
         if (entry.isIntersecting === true && isLoading.value === false) {
-          getMoreBooks()
+          getMoreBooks(infinite.value)
         }
       })
     })

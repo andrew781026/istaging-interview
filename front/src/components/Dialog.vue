@@ -207,13 +207,15 @@ export default {
 }
 
 .pop-up-container-root {
+  min-width: 100vw;
   height: 100vh;
   overflow: auto;
   z-index: 5;
+  padding: 64px 32px 32px 32px;
 }
 
 .pop-up-box {
-  margin: 128px 32px 32px 32px;
+  margin: auto;
   border-radius: 4px;
   z-index: 6;
   background-color: #fff;
@@ -255,7 +257,7 @@ export default {
     padding: 0 30px;
     line-height: 2em;
     overflow-y: auto;
-    max-height: 600px;
+    max-height: 700px;
   }
 
   > .pop-up-action {
