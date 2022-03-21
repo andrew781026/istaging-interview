@@ -38,31 +38,31 @@ button:focus:not(:focus-visible) {
   font-size: 1rem;
   border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
 
-.btn:disabled {
-  cursor: not-allowed;
-  background-color: $gray-color;
-  border-color: $gray-color;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $gray-color;
+    border-color: $gray-color;
+  }
 }
 
 .btn-primary {
   color: #fff;
   background-color: $primary-color;
   border-color: $primary-color;
-}
 
-.btn-primary:hover, .btn-primary:active {
-  color: #fff;
-  background-color: darken($primary-color,10%);
-  border-color:  darken($primary-color,10%);
-}
+  &:hover,&:active {
+    color: #fff;
+    background-color: darken($primary-color,10%);
+    border-color:  darken($primary-color,10%);
+  }
 
-.btn-primary:focus {
-  color: #fff;
-  background-color: darken($primary-color,10%);
-  border-color: darken($primary-color,10%);
-  box-shadow: 0 0 0 0.25rem lighten($primary-color,30%);
+  &:focus{
+    color: #fff;
+    background-color: darken($primary-color,10%);
+    border-color: darken($primary-color,10%);
+    box-shadow: 0 0 0 0.25rem lighten($primary-color,30%);
+  }
 }
 
 .btn.is-round {

@@ -6,17 +6,20 @@
     </transition>
   </router-view>
   <Dialog></Dialog>
+  <LoadingMask></LoadingMask>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
 import Dialog from '@/components/Dialog'
+import LoadingMask from '@/components/LoadingMask'
 
 export default {
   name: 'BookList',
   components: {
     'nav-bar': NavBar,
-    Dialog
+    Dialog,
+    LoadingMask
   }
 }
 </script>

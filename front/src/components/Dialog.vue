@@ -3,55 +3,32 @@
     <div class="pop-up-container-root">
       <div class="pop-up-box">
         <div class="pop-up-title flex justifyContent">
-          <h3></h3>
-          <img class='close' @click='closeDialog()'
-               src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMS45OTJwdCIgdmlld0JveD0iMCAwIDUxMS45OTIgNTExLjk5MiIgd2lkdGg9IjUxMS45OTJwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNDE1LjQwMjM0NCA0OTUuNDIxODc1LTE1OS40MDYyNS0xNTkuNDEwMTU2LTE1OS40MDYyNSAxNTkuNDEwMTU2Yy0yMi4wOTc2NTYgMjIuMDkzNzUtNTcuOTIxODc1IDIyLjA5Mzc1LTgwLjAxOTUzMiAwLTIyLjA5Mzc1LTIyLjA5NzY1Ni0yMi4wOTM3NS01Ny45MjE4NzUgMC04MC4wMTk1MzFsMTU5LjQxMDE1Ny0xNTkuNDA2MjUtMTU5LjQxMDE1Ny0xNTkuNDA2MjVjLTIyLjA5Mzc1LTIyLjA5NzY1Ni0yMi4wOTM3NS01Ny45MjE4NzUgMC04MC4wMTk1MzIgMjIuMDk3NjU3LTIyLjA5Mzc1IDU3LjkyMTg3Ni0yMi4wOTM3NSA4MC4wMTk1MzIgMGwxNTkuNDA2MjUgMTU5LjQxMDE1NyAxNTkuNDA2MjUtMTU5LjQxMDE1N2MyMi4wOTc2NTYtMjIuMDkzNzUgNTcuOTIxODc1LTIyLjA5Mzc1IDgwLjAxOTUzMSAwIDIyLjA5Mzc1IDIyLjA5NzY1NyAyMi4wOTM3NSA1Ny45MjE4NzYgMCA4MC4wMTk1MzJsLTE1OS40MTAxNTYgMTU5LjQwNjI1IDE1OS40MTAxNTYgMTU5LjQwNjI1YzIyLjA5Mzc1IDIyLjA5NzY1NiAyMi4wOTM3NSA1Ny45MjE4NzUgMCA4MC4wMTk1MzEtMjIuMDk3NjU2IDIyLjA5Mzc1LTU3LjkyMTg3NSAyMi4wOTM3NS04MC4wMTk1MzEgMHptMCAwIiBmaWxsPSIjZTc2ZTU0Ii8+PC9zdmc+"/>
+          <i class="icon icon-close close" @click='closeDialog()'></i>
         </div>
         <div class="pop-up-content">
           <div class="form-group">
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-                <div class="error-block">
-                  sosososo
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <label for="">身分證字號</label>
-              <div class="input-block">
-                <input type="text" value="A123456789" disabled>
-              </div>
-            </div>
+            <FormItem label="Name" :required="true" :error-msg="errMsg.name">
+              <input type="text" v-model="dialogBook.title">
+            </FormItem>
+            <FormItem label="Author" :required="true" :error-msg="errMsg.author">
+              <input type="text" v-model="dialogBook.author">
+            </FormItem>
+            <FormItem label="Pub date" :required="true" :error-msg="errMsg.publicationDate">
+              <input type="date" v-model="dialogBook.publicationDate">
+            </FormItem>
+            <FormItem label="ISBN" :required="true" :error-msg="errMsg.isbn">
+              <input type="text" v-model="dialogBook.isbn">
+            </FormItem>
+            <FormItem label="Description" :required="true" :error-msg="errMsg.description">
+              <textarea v-model="dialogBook.description"></textarea>
+            </FormItem>
           </div>
         </div>
         <div class="pop-up-action">
-          <PrimaryButton type="primary">Save</PrimaryButton>
+          <PrimaryButton type="primary">
+            <i class="icon icon-save"></i>
+            Save
+          </PrimaryButton>
         </div>
       </div>
     </div>
@@ -59,26 +36,36 @@
 </template>
 
 <script>
-import {dialogShow, openDialog, closeDialog} from '@/views/useBook'
+import {dialogShow, openDialog, closeDialog, dialogBook} from '@/views/useBook'
 import PrimaryButton from '@/components/PrimaryButton.vue'
+import FormItem from '@/components/FormItem.vue'
 
 export default {
   name: 'MyDialog',
-  setup () {
-    return {dialogShow, openDialog, closeDialog}
+  setup() {
+    return {dialogShow, dialogBook, openDialog, closeDialog}
   },
   components: {
-    PrimaryButton
+    PrimaryButton,
+    FormItem
   },
-  data () {
+  data() {
     return {
       closing: false,
       opening: false,
-      show: false
+      show: false,
+      params: [
+        {name: 'title', label: 'Name'},
+        {name: 'author', label: 'Author'},
+        {name: 'publicationDate', label: 'Pub date'},
+        {name: 'isbn', label: 'ISBN'},
+        {name: 'description', label: 'Description'}
+      ],
+      errMsg: {}
     }
   },
   watch: {
-    dialogShow (newDialogShow, oldDialogShow) {
+    dialogShow(newDialogShow, oldDialogShow) {
       if (newDialogShow !== oldDialogShow) {
         if (newDialogShow) {
           this.show = true
@@ -98,7 +85,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/form.scss";
 
 .pop-up-container.opening .pop-up-box {
   animation: bounce-in .5s;
@@ -139,6 +125,7 @@ export default {
     left: 0;
     top: 0;
     z-index: 0;
+    backdrop-filter: blur(4px);
     background-color: rgba(86, 86, 86, 0.75)
   }
 }
@@ -156,7 +143,7 @@ export default {
   background-color: #fff;
   transition: all 0.3s;
   border: 1px solid #565656;
-  width: 500px;
+  width: 550px;
 
   > .pop-up-title {
     display: flex;
@@ -169,12 +156,12 @@ export default {
     }
 
     .close {
+      color: var(--red);
       cursor: pointer;
       position: absolute;
-      right: 14px;
-      top: 14px;
-      height: 32px;
-      width: 32px;
+      right: 12px;
+      top: 12px;
+      font-size: 32px;
 
       &:hover {
         filter: opacity(0.3);
@@ -199,6 +186,13 @@ export default {
     padding: 15px;
     display: flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .pop-up-box {
+    width: calc(100vw - 64px);
   }
 }
 </style>

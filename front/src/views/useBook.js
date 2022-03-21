@@ -3,41 +3,25 @@ import BookService from '@/api/book'
 import * as dayjs from 'dayjs'
 
 export const dialogShow = ref(false)
+export const isLoading = ref(false)
 
 // 細節頁面的 singleBook
 export const singleBook = ref({})
 
+// 彈出視窗的 dialogBook
+export const dialogBook = ref({})
+
 // 列表頁面的所有 Book 資訊
 export const bookList = ref([])
 export const page = ref(1)
-export const isLoading = ref(false)
 
 export const observer = ref(null)
 export const loadMore = ref(null)
 
-function showModal () {
-  const modalWrap = document.querySelector('.pop-up-container')
-
-  const popup = modalWrap.querySelector('.pop-up-box')
-
-  modalWrap.style.display = 'flex'
-  popup.style.transform = 'scale(0)'
-
-  setTimeout(() => popup.style.transform = 'scale(1)', 0)
-}
-
-function closeModal () {
-  const modalWrap = document.querySelector('.pop-up-container')
-
-  const popup = modalWrap.querySelector('.pop-up-box')
-
-  popup.style.transform = 'scale(0)'
-
-  setTimeout(() => modalWrap.style.display = 'none', 300)
-}
-
 export const openDialog = () => dialogShow.value = true
 export const closeDialog = () => dialogShow.value = false
+export const openLoader = () => isLoading.value = true
+export const closeLoader = () => isLoading.value = false
 
 export const setSingleBook = newSingleBook => {
   const published = dayjs(newSingleBook.publicationDate).format('YYYY/MM/DD HH:mm')
@@ -48,13 +32,13 @@ export const setSingleBook = newSingleBook => {
 }
 
 export const getMoreBooks = () => {
-  isLoading.value = true
+  openLoader()
   BookService.list(page.value)
     .then(books => {
       // 根據高度 & 寬度 , 控制要顯示的 book 數量
       bookList.value = [...(bookList.value || []), ...books['hydra:member']]
       page.value++
-      isLoading.value = false
+      closeLoader()
     })
     .catch(console.error)
 }
@@ -77,8 +61,7 @@ export const useBook = () => {
         //   entry.target
         //   entry.time
         if (entry.isIntersecting === true && isLoading.value === false) {
-          console.log('isIntersecting')
-          // getMoreBooks()
+          getMoreBooks()
         }
       })
     })

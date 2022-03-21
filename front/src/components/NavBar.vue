@@ -12,7 +12,7 @@
         <i class="icon icon-back"></i>
         <span class="text">Back</span>
       </div>
-      <h1 class="nav-title">{{singleBook.title}}</h1>
+      <h1 class="nav-title">{{ singleBook.title }}</h1>
       <div class="icon-wrap" @click="openDialog">
         <i class="icon icon-edit"></i>
         <span class="text">Edit</span>
@@ -33,11 +33,11 @@ export default defineComponent({
       default: 'The Book Shelf'
     }
   },
-  setup () {
+  setup() {
     return {singleBook}
   },
   methods: {
-    toListPage () {
+    toListPage() {
       this.$router.push({name: 'list'})
     },
     openDialog
@@ -47,19 +47,26 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import "../scss/app.scss";
+
 .nav {
   position: sticky;
   top: 0;
   display: flex;
   height: 80px;
-  background-color: #53c28f;
+  background-color: $primary-color;
   align-items: center;
   padding: 0;
-  .nav-title{
+
+  .nav-title {
     flex-grow: 1;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .icon-wrap{
+
+  .icon-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +76,7 @@ export default defineComponent({
     cursor: pointer;
     transition: all 0.3s;
     padding: 30px;
-    background-color: #41b682;
+    background-color: darken($primary-color, 6%);
     /*
     顏色參考 : https://www.colorhexa.com/42b983
     border-color: #5d5d5d;
@@ -81,11 +88,12 @@ export default defineComponent({
       border-width: 0 0 0 1px;
     }
     */
-    &:hover{
+    &:hover {
       color: white;
       background-color: #7c7f7e;
     }
-    .text{
+
+    .text {
       margin-left: 8px;
       transform: translateY(-2px);
     }

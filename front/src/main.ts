@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './scss/app.scss'
+import './scss/form.scss'
 
 // 載入使用的 icons
 import './icons/dist/icons.css'

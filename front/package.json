@@ -57,7 +57,8 @@
     },
     "rules": {
       "object-curly-spacing": "off",
-      "no-return-assign": "off"
+      "no-return-assign": "off",
+      "space-before-function-paren": "off"
     }
   },
   "browserslist": [
