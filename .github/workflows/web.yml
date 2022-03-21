@@ -43,16 +43,16 @@ jobs:
           node-version: '14'
 
       # Cache node_modules : https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
+#      - name: Cache dependencies
+#        id: cache
+#        uses: actions/cache@v2
+#        with:
+#          path: ./node_modules
+#          key: modules-${{ hashFiles('package-lock.json') }}
 
       # Runs a single command using the runners shell
       - name: install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+#        if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
 
       # Runs a single command using the runners shell
