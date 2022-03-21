@@ -36,6 +36,13 @@ export const setSingleBook = newSingleBook => {
   }
 }
 
+export const getSingleBook = async (id, singleBook) => {
+  openLoader()
+  const sameId = singleBook.value && singleBook.value.id === id
+  if (!sameId) setSingleBook(await BookService.get(id))
+  closeLoader()
+}
+
 export const updateSingleBook = (id, newSingleBook) => {
   openLoader()
   BookService.update(id, newSingleBook)

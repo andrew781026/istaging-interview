@@ -16,13 +16,7 @@
 <script>
 import {defineComponent, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import BookService from '@/api/book'
-import {setSingleBook, singleBook} from './useBook'
-
-const getSingleBook = async (id, singleBook) => {
-  if (singleBook.value && singleBook.value.id === id) return singleBook
-  else setSingleBook(await BookService.get(id))
-}
+import {getSingleBook, singleBook} from './useBook'
 
 export default defineComponent({
   name: 'DetailView',
