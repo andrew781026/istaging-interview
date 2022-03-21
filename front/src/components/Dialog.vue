@@ -141,7 +141,7 @@ export default {
       const errMsgs = Object.keys(this.rules).map(attr => validateSingleAttr(this.rules, attr, this.dialogBook[attr]))
       // 將產生的 errMsgs 放到畫面上
       errMsgs.forEach(item => this.errMsg[item.attr] = item.msg)
-      return errMsgs.join('')
+      return errMsgs.map(({msg}) => msg).join('')
     },
     save() {
       const newSingleBook = {

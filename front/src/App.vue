@@ -1,10 +1,12 @@
 <template>
   <nav-bar></nav-bar>
-  <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <main>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component"/>
+      </transition>
+    </router-view>
+  </main>
   <Dialog></Dialog>
   <LoadingMask></LoadingMask>
 </template>
@@ -25,6 +27,10 @@ export default {
 </script>
 
 <style lang="scss">
+main {
+  overflow: auto;
+  height: calc(100vh - var(--nav-height));
+}
 
 /* the transition related classes */
 .fade-enter-active,

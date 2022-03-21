@@ -53,7 +53,7 @@ export default defineComponent({
   position: sticky;
   top: 0;
   display: flex;
-  height: 80px;
+  height: var(--nav-height);
   background-color: $primary-color;
   align-items: center;
   padding: 0;

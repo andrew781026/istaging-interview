@@ -20,7 +20,7 @@ import {getSingleBook, singleBook} from './useBook'
 
 export default defineComponent({
   name: 'DetailView',
-  setup () {
+  setup() {
     const route = useRoute()
     onMounted(async () => {
       await getSingleBook(route.params.id, singleBook)
@@ -31,6 +31,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "../scss/app.scss";
+
 .detail-list {
   display: flex;
   justify-content: center;
@@ -46,12 +48,13 @@ export default defineComponent({
 
   .info {
     width: 50%;
-    .title{
+
+    .title {
       margin-top: 0;
     }
 
     .author, .isbn {
-      color: #42b983;
+      color: darken($primary-color, 8%);
     }
   }
 }
