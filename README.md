@@ -4,6 +4,8 @@
 
 iStaging 2D FrontEnd Engineer Assessment Test
 
+## [Demo Page](https://andrew781026.github.io/istaging-interview/)
+
 ### 目前使用 Tech
 
 > Tech
