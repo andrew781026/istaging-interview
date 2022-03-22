@@ -15,6 +15,13 @@ iStaging 2D FrontEnd Engineer Assessment Test
 - 使用 vue ui 建立的腳手架
 - vue3 + eslint with Standard + scss + TypeScript
 
+> dependencies
+
+- [dayjs](https://day.js.org/) : 方便操作日期變化
+- [isbn-util](https://www.npmjs.com/package/isbn-util) : 驗證文字是不是 ISBN
+- [query-string](https://www.npmjs.com/package/query-string) : 將 params 轉換成 query-string
+- [@vuepic/vue-datepicker](https://vue3datepicker.com/) : datepicker component
+
 > Tool
 
 - [FlatIcon](https://www.flaticon.com/)
@@ -39,15 +46,15 @@ iStaging 2D FrontEnd Engineer Assessment Test
 
 - 規格說明 : API Docs - https://demo.api-platform.com/docs
 - 因 CORS 問題 , API 請求網址請加 Proxy 服務網址的前綴
-  - https://cors-anywhere-dot-vr-cam-161603.uc.r.appspot.com/
-  - e.g. GET https://cors-anywhere-dot-vr-cam-161603.uc.r.appspot.com/https://demo.api-platform.com/books
-- 使用到的資料欄位 : 
-  - ISBN 
-  - 名稱 title 
-  - 敘述 description 
-  - 作者 author 
-  - 出版日期 publicationDate
-  - 圖書預覽圖請固定使用 : https://picsum.photos/800/600
+    - https://cors-anywhere-dot-vr-cam-161603.uc.r.appspot.com/
+    - e.g. GET https://cors-anywhere-dot-vr-cam-161603.uc.r.appspot.com/https://demo.api-platform.com/books
+- 使用到的資料欄位 :
+    - ISBN
+    - 名稱 title
+    - 敘述 description
+    - 作者 author
+    - 出版日期 publicationDate
+    - 圖書預覽圖請固定使用 : https://picsum.photos/800/600
 
 #### 功能說明
 
@@ -57,7 +64,7 @@ iStaging 2D FrontEnd Engineer Assessment Test
 2. 使用 Nuxt.js & SSR 模式
 3. 使用 TypeScript
 4. 實作 SEO
-5. 撰寫 Unit Test 
+5. 撰寫 Unit Test
 6. 首頁圖書列表實作無限滾動
 7. 確保圖書列表載入超過 10,000 筆圖書資料後 , 不影響瀏覽體驗
 8. 實作 CI/CD , 並將網站部屬至任一雲端代管服務中
