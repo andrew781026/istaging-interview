@@ -1,7 +1,8 @@
-import {onBeforeUnmount, onMounted, ref} from 'vue'
+import {onBeforeUnmount, onMounted, ref, Ref} from 'vue'
 import BookService from '@/api/book'
-import * as dayjs from 'dayjs'
-import {useRoute} from 'vue-router'
+import dayjs from 'dayjs'
+import {useRoute, Router} from 'vue-router'
+import {Book, EmptyObject} from '@/types/book'
 
 export const dialogShow = ref(false)
 export const dialogType = ref('')
@@ -9,19 +10,19 @@ export const isLoading = ref(false)
 export const infinite = ref(false)
 
 // 細節頁面的 singleBook
-export const singleBook = ref({})
+export const singleBook: Ref<Book | EmptyObject> = ref({})
 
 // 彈出視窗的 dialogBook
 export const dialogBook = ref({})
 
 // 列表頁面的所有 Book 資訊
-export const bookList = ref([])
+export const bookList: Ref<Array<Book>> = ref([])
 export const page = ref(1)
 
-export const observer = ref(null)
-export const loadMore = ref(null)
+export const observer: Ref<IntersectionObserver | null> = ref(null)
+export const loadMore: Ref<HTMLElement | null> = ref(null)
 
-export const openDialog = (newDialogBook, id, type = 'create') => {
+export const openDialog = (newDialogBook: Book, id: string, type = 'create') => {
   dialogType.value = type
   dialogBook.value = (type === 'edit') ? {...newDialogBook, id} : {}
   dialogShow.value = true
@@ -30,7 +31,7 @@ export const closeDialog = () => dialogShow.value = false
 export const openLoader = () => isLoading.value = true
 export const closeLoader = () => isLoading.value = false
 
-export const setSingleBook = newSingleBook => {
+export const setSingleBook = (newSingleBook: Book) => {
   const published = dayjs(newSingleBook.publicationDate).format('YYYY/MM/DD HH:mm')
   singleBook.value = {
     published,
@@ -38,14 +39,14 @@ export const setSingleBook = newSingleBook => {
   }
 }
 
-export const getSingleBook = async (id, singleBook) => {
+export const getSingleBook = async (id: string, singleBook: Book) => {
   openLoader()
-  const sameId = singleBook.value && singleBook.value.id === id
+  const sameId = singleBook && singleBook['@id'] === id
   if (!sameId) setSingleBook(await BookService.get(id))
   closeLoader()
 }
 
-export const updateSingleBook = (id, newSingleBook) => {
+export const updateSingleBook = (id: string, newSingleBook: Book) => {
   openLoader()
   BookService.update(id, newSingleBook)
     .then(book => {
@@ -56,7 +57,7 @@ export const updateSingleBook = (id, newSingleBook) => {
     .finally(() => closeLoader())
 }
 
-export const addSingleBook = (newSingleBook, router) => {
+export const addSingleBook = (newSingleBook: Book, router: Router) => {
   openLoader()
   BookService.add(newSingleBook)
     .then(book => {
@@ -85,35 +86,26 @@ export const getMoreBooks = () => {
 
 export const useBook = () => {
   onMounted(() => {
-    infinite.value = useRoute().query.isInfinite
+    infinite.value = (useRoute().query.isInfinite !== 'false')
     // 使用 BookService 取得 book 的列表資料
     getMoreBooks()
 
     observer.value = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        // Each entry describes an intersection change for one observed
-        // target element:
-        //   entry.boundingClientRect
-        //   entry.intersectionRatio
-        //   entry.intersectionRect
-        //   entry.isIntersecting
-        //   entry.rootBounds
-        //   entry.target
-        //   entry.time
         if (entry.isIntersecting === true && isLoading.value === false) {
-          getMoreBooks(infinite.value)
+          getMoreBooks()
         }
       })
     })
 
     // 開始觀察
-    observer.value.observe(loadMore.value)
+    if (loadMore.value) observer.value.observe(loadMore.value)
   })
 
   onBeforeUnmount(() => {
     if (observer.value instanceof IntersectionObserver) {
       // 停止觀察
-      observer.value.unobserve(loadMore.value)
+      if (loadMore.value) observer.value.unobserve(loadMore.value)
 
       // 關閉觀察器
       observer.value.disconnect()

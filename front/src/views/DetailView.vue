@@ -23,7 +23,7 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     onMounted(async () => {
-      await getSingleBook(route.params.id, singleBook)
+      await getSingleBook(route.params.id, singleBook.value)
     })
     return {book: singleBook}
   }

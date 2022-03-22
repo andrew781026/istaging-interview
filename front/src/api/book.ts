@@ -1,28 +1,10 @@
 import DomainCommon from './common'
-
-interface Review {
-  '@context': string
-  '@id': string
-  '@type': string
-  'body': string
-}
-
-interface Book {
-  '@context': string
-  '@id': string
-  '@type': string
-  'isbn': string
-  'title': string
-  'description': string
-  'author': string
-  'publicationDate': string | Date
-  'reviews': Array<Review>
-}
+import {Book, BookCollection} from '@/types/book'
 
 const BookService = {
 
   // 一頁有 30 筆資料
-  list: function (page = 1) {
+  list: function (page = 1): Promise<BookCollection> {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchGet({
         url: `${DomainCommon.getApiUrl()}/books`,
@@ -36,7 +18,7 @@ const BookService = {
     })
   },
 
-  get: function (id: string) {
+  get: function (id: string): Promise<Book> {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchGet({
         url: `${DomainCommon.getApiUrl()}/books/${id}`,
@@ -46,7 +28,7 @@ const BookService = {
     })
   },
 
-  add: function (book: Book) {
+  add: function (book: Book): Promise<Book> {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchPost({
         url: `${DomainCommon.getApiUrl()}/books`,
@@ -61,7 +43,7 @@ const BookService = {
     })
   },
 
-  update: function (id: string, book: Book) {
+  update: function (id: string, book: Book): Promise<Book> {
     return new Promise((resolve, reject) => {
       return DomainCommon.fetchPatch({
         url: `${DomainCommon.getApiUrl()}/books/${id}`,
