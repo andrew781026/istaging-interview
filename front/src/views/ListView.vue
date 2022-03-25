@@ -3,8 +3,8 @@
     <div class="book-list">
       <Card v-for="book in bookList" :key="book.isbn" :book="book" @click="viewDetail(book)"></Card>
     </div>
-    <div class="load-more" ref="loadMore">
-      <PrimaryButton type="primary" @click="getMoreBooks">LOAD MORE</PrimaryButton>
+    <div class="load-more" ref="loadMore" v-show="canLoadMore">
+      <PrimaryButton type="primary" @click="getMoreBooks" >LOAD MORE</PrimaryButton>
     </div>
   </div>
 </template>
@@ -13,13 +13,13 @@
 import {defineComponent} from 'vue'
 import Card from '@/components/Card.vue'
 import PrimaryButton from '@/components/PrimaryButton.vue'
-import {page, bookList, setSingleBook, observer, loadMore, useBook, getMoreBooks} from './useBook'
+import {page, bookList, canLoadMore, setSingleBook, observer, loadMore, useBook, getMoreBooks} from './useBook'
 
 export default defineComponent({
   name: 'ListView',
-  setup () {
+  setup() {
     useBook()
-    return {observer, loadMore, bookList, page}
+    return {observer, canLoadMore, loadMore, bookList, page}
   },
   components: {
     Card,
@@ -27,7 +27,7 @@ export default defineComponent({
   },
   methods: {
     getMoreBooks,
-    viewDetail (book) {
+    viewDetail(book) {
       setSingleBook(book)
       // go to detail page
       this.$router.push({name: 'detail', params: {id: book['@id'].replace('/books/', '')}})

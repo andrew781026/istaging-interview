@@ -12,5 +12,3 @@ gen
 .firebase
 *.log
 logs
-
-package-lock.json

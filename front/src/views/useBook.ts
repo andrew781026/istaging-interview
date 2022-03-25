@@ -1,4 +1,4 @@
-import {onBeforeUnmount, onMounted, ref, Ref} from 'vue'
+import {onBeforeUnmount, onMounted, computed, ref, Ref} from 'vue'
 import BookService from '@/api/book'
 import dayjs from 'dayjs'
 import {useRoute, Router} from 'vue-router'
@@ -17,6 +17,7 @@ export const dialogBook = ref({})
 
 // 列表頁面的所有 Book 資訊
 export const bookList: Ref<Array<Book>> = ref([])
+export const totalItems: Ref<number> = ref(0)
 export const page = ref(1)
 
 export const observer: Ref<IntersectionObserver | null> = ref(null)
@@ -30,6 +31,8 @@ export const openDialog = (newDialogBook: Book, id: string, type = 'create') => 
 export const closeDialog = () => dialogShow.value = false
 export const openLoader = () => isLoading.value = true
 export const closeLoader = () => isLoading.value = false
+
+export const canLoadMore = computed(() => bookList.value.length < totalItems.value)
 
 export const setSingleBook = (newSingleBook: Book) => {
   const published = dayjs(newSingleBook.publicationDate).format('YYYY/MM/DD HH:mm')
@@ -77,7 +80,9 @@ export const getMoreBooks = () => {
         // 根據高度 & 寬度 , 控制要顯示的 book 數量
         // bookList.value.push(...books['hydra:member'])
         bookList.value = [...(bookList.value || []), ...books['hydra:member']]
-        if (!infinite.value) page.value++
+        // 書籍數量
+        totalItems.value = books['hydra:totalItems']
+        if (infinite.value === false) page.value++
       }
     })
     .catch(console.error)
@@ -86,15 +91,14 @@ export const getMoreBooks = () => {
 
 export const useBook = () => {
   onMounted(() => {
-    infinite.value = (useRoute().query.isInfinite !== 'false')
+    infinite.value = (useRoute().query.isInfinite === 'true')
     // 使用 BookService 取得 book 的列表資料
     getMoreBooks()
 
     observer.value = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting === true && isLoading.value === false) {
-          getMoreBooks()
-        }
+        const needLoadMore = entry.isIntersecting && !isLoading.value
+        if (needLoadMore) getMoreBooks()
       })
     })
 

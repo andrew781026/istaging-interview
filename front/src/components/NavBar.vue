@@ -1,13 +1,6 @@
 <template>
   <nav class="nav">
-    <template v-if="$route.name === 'list'">
-      <h1 class="nav-title">The Book Shelf</h1>
-      <div class="icon-wrap" @click="openDialog">
-        <i class="icon icon-add"></i>
-        <span class="text">Create</span>
-      </div>
-    </template>
-    <template v-else>
+    <template v-if="$route.name === 'detail'">
       <div class="icon-wrap" @click="toListPage">
         <i class="icon icon-back"></i>
         <span class="text">Back</span>
@@ -16,6 +9,13 @@
       <div class="icon-wrap" @click="openDialog(singleBook,$route.params.id,'edit')">
         <i class="icon icon-edit"></i>
         <span class="text">Edit</span>
+      </div>
+    </template>
+    <template v-else-if="$route.name === 'list'">
+      <h1 class="nav-title">The Book Shelf</h1>
+      <div class="icon-wrap" @click="openDialog">
+        <i class="icon icon-add"></i>
+        <span class="text">Create</span>
       </div>
     </template>
   </nav>

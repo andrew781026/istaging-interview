@@ -3,32 +3,25 @@
        :data-src="`https://picsum.photos/800/600/?random=${ isbn }`" alt="圖片">
 </template>
 
-<script>
-import {onBeforeUnmount, onMounted, ref} from 'vue'
+<script lang="ts">
+import {onBeforeUnmount, onMounted, Ref, ref} from 'vue'
 
 const imgObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    // Each entry describes an intersection change for one observed
-    // target element:
-    //   entry.boundingClientRect
-    //   entry.intersectionRatio
-    //   entry.intersectionRect
-    //   entry.isIntersecting
-    //   entry.rootBounds
-    //   entry.target
-    //   entry.time
-    if (entry.isIntersecting === true) {
-      // console.log('image isIntersecting')
-      entry.target.src = entry.target.dataset.src
-    }
-    if (entry.isIntersecting === false) {
-      // console.log('image is out of Intersecting')
-      // entry.target.src = 'https://fakeimg.pl/800x600/'
+    if (entry.target instanceof HTMLImageElement) {
+      const isIntersecting = entry.isIntersecting
+      const dataSrc = entry.target.dataset.src
+      const isReal = entry.target.dataset.isReal
+      const needUpdateSrc = isIntersecting && dataSrc && !isReal
+      if (needUpdateSrc) {
+        entry.target.src = dataSrc
+        entry.target.dataset.isReal = 'true'
+      }
     }
   })
 })
 
-const useImage = (imageRef) => {
+const useImage = (imageRef: Ref<HTMLImageElement>) => {
   onMounted(() => {
     // 開始觀察
     imgObserver.observe(imageRef.value)
@@ -46,8 +39,8 @@ export default {
   props: {
     isbn: String
   },
-  setup () {
-    const imageRef = ref(null)
+  setup() {
+    const imageRef = ref(new Image())
 
     useImage(imageRef)
     return {imageRef}

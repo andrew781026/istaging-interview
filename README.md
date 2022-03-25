@@ -8,6 +8,14 @@ iStaging 2D FrontEnd Engineer Assessment Test
 
 [![screenshot](./docs/screenshot.png)](https://andrew781026.github.io/istaging-interview/)
 
+### 建議修改項目
+
+- [ ] infinite scroll - 有 BUG 在上面
+- [ ] 當資料全部載入時 , 可以隱藏 "載入更多" 的按鈕
+- [ ] NavBar 進入時 , Back 按鈕會閃一下 (在無 cache 模式會出現)
+- [ ] Dialog 可改用 2 層 Transition 
+- [ ] 為了 CI / CD 下載到正確的套件 , 建議不要 ignore package-lock.json
+
 ### 目前使用 Tech
 
 > Tech
