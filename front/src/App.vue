@@ -7,20 +7,20 @@
       </transition>
     </router-view>
   </main>
-  <Dialog></Dialog>
+  <DialogForm></DialogForm>
   <LoadingMask></LoadingMask>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
-import Dialog from '@/components/Dialog'
+import DialogForm from './views/DialogForm'
 import LoadingMask from '@/components/LoadingMask'
 
 export default {
   name: 'BookList',
   components: {
     'nav-bar': NavBar,
-    Dialog,
+    DialogForm,
     LoadingMask
   }
 }
