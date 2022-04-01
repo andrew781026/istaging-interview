@@ -12,6 +12,10 @@ const routes: Array<RouteRecordRaw> = [
     name: 'detail',
     component: () => import('../views/DetailView.vue'),
     meta: {title: '單本書籍'}
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: () => ({name: 'list'})
   }
 ]
 
