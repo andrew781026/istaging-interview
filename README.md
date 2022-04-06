@@ -10,10 +10,11 @@ iStaging 2D FrontEnd Engineer Assessment Test
 
 ### 建議修改項目
 
-- [ ] infinite scroll - 有 BUG 在上面
-- [ ] 當資料全部載入時 , 可以隱藏 "載入更多" 的按鈕
-- [ ] NavBar 進入時 , Back 按鈕會閃一下 (在無 cache 模式會出現)
-- [ ] Dialog 可改用 2 層 Transition 
+- [x] infinite scroll - 有 BUG 在上面 => (已修正) 設定的 ?isInfinite=true 才開啟 infinite scroll 的邏輯寫錯
+- [x] 當資料全部載入時 , 可以隱藏 "載入更多" 的按鈕 => (已修正) 當資料長度 = 當前載入的數量 , 隱藏 "載入更多" 的按鈕
+- [ ] NavBar 進入時 , Back 按鈕會閃一下 (在無 cache 模式會出現) => 原因 : vue-router 還沒載入時 , nav-bar 已顯示 , 因此暫時會有 this.$router.name =
+  undefined 的情況
+- [ ] Dialog 可改用 2 層 Transition
 - [ ] 為了 CI / CD 下載到正確的套件 , 建議不要 ignore package-lock.json
 
 ### 目前使用 Tech

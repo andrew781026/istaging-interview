@@ -1,17 +1,17 @@
 <template>
   <nav class="nav">
-    <template v-if="$route.name === 'detail'">
+    <template v-if="isDetailPage">
       <div class="icon-wrap" @click="toListPage">
         <i class="icon icon-back"></i>
         <span class="text">Back</span>
       </div>
       <h1 class="nav-title">{{ singleBook.title }}</h1>
-      <div class="icon-wrap" @click="openDialog(singleBook,$route.params.id,'edit')">
+      <div class="icon-wrap" @click="openDialog(singleBook,detailId,'edit')">
         <i class="icon icon-edit"></i>
         <span class="text">Edit</span>
       </div>
     </template>
-    <template v-else-if="$route.name === 'list'">
+    <template v-else-if="isListPage">
       <h1 class="nav-title">The Book Shelf</h1>
       <div class="icon-wrap" @click="openDialog">
         <i class="icon icon-add"></i>
@@ -24,6 +24,7 @@
 <script>
 import {defineComponent} from 'vue'
 import {singleBook, openDialog} from '@/views/useBook'
+import {useRouterCustom, getDetailId, isDetailPage, isListPage} from '@/views/useMyRoute'
 
 export default defineComponent({
   name: 'NavBar',
@@ -34,13 +35,9 @@ export default defineComponent({
     }
   },
   setup() {
-    return {singleBook}
-  },
-  methods: {
-    toListPage() {
-      this.$router.push({name: 'list'})
-    },
-    openDialog
+    const {toListPage} = useRouterCustom()
+    const {detailId} = getDetailId()
+    return {singleBook, openDialog, toListPage, detailId, isDetailPage, isListPage}
   }
 })
 </script>

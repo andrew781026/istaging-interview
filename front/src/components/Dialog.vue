@@ -1,8 +1,8 @@
 <template>
   <transition name="dialog-fade">
-  <div class="pop-up-container" v-show="dialogShow">
-      <div class="mask" ></div>
-      <div class="pop-up-container-root" >
+    <div class="pop-up-container" v-show="dialogShow">
+      <div class="mask"></div>
+      <div class="pop-up-container-root">
         <div class="pop-up-box">
           <div class="pop-up-title flex justifyContent">
             <i class="icon icon-close close" @click='closeDialog()'></i>
@@ -16,12 +16,12 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </transition>
 </template>
 
 <script>
-import { dialogShow, closeDialog} from '@/views/useBook'
+import {dialogShow, closeDialog} from '@/views/useBook'
 
 export default {
   name: 'MyDialog',
