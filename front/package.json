@@ -6,7 +6,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "serve": "vue-cli-service serve --port 3077",
+    "serve": "node fantasticon/generator.js && vue-cli-service serve --port 3077",
     "build": "node fantasticon/generator.js && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -37,6 +37,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.3",
     "fantasticon": "^1.2.3",
+    "msw": "^2.11.2",
     "open": "^8.4.0",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
@@ -67,5 +68,11 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "msw": {
+    "workerDirectory": [
+      "",
+      "istaging-interview"
+    ]
+  }
 }

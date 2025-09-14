@@ -15,10 +15,12 @@ import Card from '@/components/Card.vue'
 import PrimaryButton from '@/components/PrimaryButton.vue'
 import {page, bookList, canLoadMore, setSingleBook, observer, loadMore, useBook, getMoreBooks} from './useBook'
 import {useRouterCustom} from './useMyRoute'
+import TestService from '@/api/test'
 
 export default defineComponent({
   name: 'ListView',
   setup() {
+    TestService.get() // 取得測試用資料
     useBook()
     const {toDetailPage} = useRouterCustom()
 
